@@ -1,0 +1,51 @@
+label {
+   color: var(--c-navy);
+   font-weight: 600;
+   margin-left: 8px;
+}
+
+/* Required asterisk */
+label > span {
+   color: var(--c-red);
+   margin-left: 4px;
+}
+
+input {
+   height: 48px;
+   border-style: none;
+   text-indent: 8px;
+   padding-right: 8px;
+} 
+
+/* Disable default :focus outline */
+input:focus {
+   outline: none;
+}
+
+/* input bottom border - background */
+input+span {
+   position: relative;
+   width: 100%;
+   height: 1px;
+   background: var(--c-gray-light-01);
+}
+
+/* input bottom border - fill hidden */
+input+span::after {
+   position: absolute;
+   content: "";
+   height: 1px;
+   width: 100%;
+   background: var(--c-navy);
+   transform: scaleX(0);
+   transform-origin: 0;
+   transition: transform 180ms ease-out;
+}
+
+/* input bottom border - fill visible */
+input+span.hover::after,
+input+span.focus::after {
+   transform: scaleX(1);
+   transform-origin: 0;
+   transition: transform 180ms ease-out;
+}

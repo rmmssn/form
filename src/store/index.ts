@@ -1,23 +1,22 @@
 import { createStore, createTypedHooks, State, Actions } from "easy-peasy";
-import { RegisterFormModel, registerFormModel } from "./models/register-form";
+import { registerFormModel, IRegisterFormModel } from "./models/register-form";
 
 
 interface StoreModel {
-   registerForm: RegisterFormModel
+   registerForm: IRegisterFormModel
 }
 
-// combine all models for store creation
+// Combine all models for store creation
 const model: StoreModel = {
    registerForm: registerFormModel
 }
 
-// destructure hooks to get StoreModel types
+// Destructure with types using createTypeHooks
 export const { useStoreActions, useStoreState } = createTypedHooks<StoreModel>();
 
-// disableImmer to allow returning new states
-export const store = createStore(model, {disableImmer: true });
+// Create store (disable immer = immutable state)
+export const store = createStore(model, {disableImmer: true});
 
-// explicit export of State and Action 
+// Explicit exports of State and Actions 
 export type IStateModel = State<StoreModel>;
 export type IActionModel = Actions<StoreModel>;
-

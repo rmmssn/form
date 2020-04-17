@@ -1,0 +1,29 @@
+button {
+   background: var(--c-green);
+   border: none;
+   border-radius: 3px;
+   font-weight: 600;
+   color: #FFF;
+   padding: 10px 40px;
+   margin-top: 64px;
+   float: right;
+   clear: both;
+   transition: all 120ms ease-in-out;
+}
+
+/* Remove default outline on focus */
+button:focus {
+   outline: none;
+}
+
+/* Faster transition when pressed */
+button:active {
+   transition: all 50ms ease-in-out;
+}
+
+/* On Hover */
+button:hover:not(:active) {
+   cursor: pointer;
+   transform: translateY(-2px);
+   box-shadow: 0 6px 12px -8px rgba(0,0,0,0.3);
+}

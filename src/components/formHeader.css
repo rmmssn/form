@@ -1,0 +1,38 @@
+.form-header {
+   overflow: auto;
+   margin-bottom: 40px;
+}
+
+/* Steps wrapper */
+.form-header > .steps {
+   display: flex;
+   font-weight: 500;
+   margin: 16px 0;
+}
+
+.form-step.active {
+   color: var(--c-green);
+}
+
+.form-step > span {
+   margin-right: 10px;   
+}
+
+/* Step number */
+.form-step > span:first-of-type {
+   display: inline-block;
+   text-align: center;
+   min-width: 12px;
+   padding: 6px 10px;
+   border: 2px solid var(--c-green);
+   border-radius: 10px;
+}
+
+/* Progress bar */
+.form-header > span:last-of-type {
+   display: block;
+   width: 100%;
+   height: 2px;
+   border-radius: 1px;
+   background: var(--c-gray-light-01);
+}

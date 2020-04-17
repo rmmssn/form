@@ -2,18 +2,20 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { StoreProvider } from "easy-peasy"
 import { store } from '../store';
-import Nav from "../components/nav";
-import "../styles/index.css";
-import { UserPage } from '../pages/user-page';
-import { PrivacyPage } from '../pages/privacy-page';
-import { DonePage } from '../pages/done-page';
 
-function App() {
+import FormHeader from "../components/FormHeader";
+import UserPage from '../pages/user-page';
+import PrivacyPage from '../pages/privacy-page';
+import DonePage from '../pages/done-page';
+
+import "./app.css";
+
+export default function App() {
   return (
      <BrowserRouter>
          <StoreProvider store={store}>
-            <div className="App">
-               <Nav/>
+            <div className="app">
+               <FormHeader/>
                <Switch>
                   <Route path="/done">
                      <DonePage />
@@ -30,5 +32,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;

@@ -1,32 +1,72 @@
 import { Action, State, Computed, action, computed } from "easy-peasy";
+import regex, { IRegexTest } from "../../utils/regex";
 
-export interface RegisterFormModel {
-   fullName: string | undefined;
-   role: string | undefined;
-   password: string | undefined;
+// RegisterFormModel types => Store
+export interface IRegisterFormModel {
+   // Input values
+   fullname: string;
+   role: string;
+   email: string;
+   password: string;
 
-   // setPassword: Action<RegisterFormModel, string>;
-   
+   // Action to update the store
    //@ts-ignore
-   setFormValue: Action<RegisterFormModel, Partial<State<RegisterFormModel>>>;
+   setFormValue: Action<RegisterFormModel, Partial<State<IRegisterFormModel>>>;
 
-   areAllFieldsFilledOut: Computed<RegisterFormModel, boolean>;
+   // Computed values from store
+   fullnameIsValid: Computed<IRegisterFormModel, boolean>;
+   emailIsValid: Computed<IRegisterFormModel, boolean>;
+   passwordIsValid: Computed<IRegisterFormModel, boolean>;
+   allFieldsAreValid: Computed<IRegisterFormModel, boolean>;
 }
 
-export const registerFormModel: RegisterFormModel = {
-   fullName: undefined,
-   role: undefined,
-   password: undefined,
 
+export const registerFormModel: IRegisterFormModel = {
+   // Default input values
+   fullname: '',
+   role: '',
+   email: '',
+   password: '',
+
+   // Store values updater
    setFormValue: action((state, payload) => {
-      return {
-         ...state,
-         ...payload,
-      }
+      return { ...state, ...payload }
    }),
 
-   areAllFieldsFilledOut: computed((state) => {
-      return !!(state.fullName && state.role && state.password)
+   /*
+   ** Computed values
+   ** return Booleans
+   */
+
+   // fullname: value vs regex
+   fullnameIsValid: computed((state) => {
+      // return regex.lettersSpace.test(state.fullname);
+      return true;
+   }),
+
+   // email: value vs regex
+   // emailIsValid: computed((state) => {
+   //    return !!(state.email && regex.email.test(state.email));
+   // }),
+   emailIsValid: computed((state) => {
+      return (
+         !!(state.email &&
+         regex.email.regex.test(state.email))
+      );
+   }),
+
+   // password: value vs regex
+   passwordIsValid: computed((state) => {
+      return (
+         !!(state.password &&
+         regex.password.map((test:IRegexTest) => test.regex.test(state.password)
+         ).reduce((total:boolean, result:boolean) => total && result ))
+      );
+   }),
+
+   // all ok? Uses each previous computed values 
+   allFieldsAreValid: computed((state) => {
+      return !!(state.fullnameIsValid && state.emailIsValid && state.passwordIsValid)
    })
 
 }
