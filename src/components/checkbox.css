@@ -1,0 +1,50 @@
+/* Default */
+.checkbox {
+   display: block;
+   position: relative;
+   width: 27px;
+   height: 27px;
+   border: 2px solid var(--c-gray-light-03);
+   border-radius: 10px;
+   background: #FFF;
+   transition: all 100ms ease-out 60ms;
+}
+
+/* Hover */
+.checkbox:hover {
+   cursor: pointer;
+   border-color: var(--c-gray-light-02);
+}
+
+/* Focus */
+.checkbox:focus,
+.checkbox.selected:focus {
+   outline: none;
+   border: 2px solid var(--c-blue);
+   box-shadow: inset 0 0 0 1px #FFF;
+}
+
+/* Selected */
+.checkbox.selected {
+   background: var(--c-green);
+   border-color: var(--c-green);
+   transition: all 110ms ease-out;
+}
+
+/* Icon on Default */
+.checkbox > svg {
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   margin: auto auto;
+   transform: scale(0) translateY(8px);
+   transition: all 180ms ease-out;
+}
+
+/* Icon on Selected */
+.checkbox.selected > svg {
+   transform: scale(1) translateY(0);
+   transition: all 180ms ease-out;
+}

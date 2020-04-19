@@ -1,31 +1,47 @@
+/* Helper box */
 .helper {
-   padding: 16px 24px;
+   padding: var(--m-medium) var(--m-medium);
    border-radius: 0 0 4px 4px;
    border-width: 1px;
    border-style: solid;
+   font-weight: 500;
 
    background: var(--c-blue-light-01);
    border-color: var(--c-blue-light-02);
 }
 
+/* Error helper box */
 .helper.error {
    background: var(--c-red-light-01);
    border-color: var(--c-red-light-02);
 }
 
-.helper.valid {
-   opacity: 0;
-   transition: opacity 0 ease 1s;
+/* Error helper text */
+.helper.error > span {
+   color: var(--c-red);
 }
 
-
-.help-row {
+/* Helper row - Default */
+.helper > div {
    display: flex;
-   transform: scale(0.7);
-   transition: all 300ms
+   align-items: center;
+   height: 24px;
+   color: var(--c-blue);
 }
 
-.help-row.valid {
-   transform: scale(1);
-   transition: all 300ms;
+/* Helper row - Valid */
+.helper > div.valid {
+   color: var(--c-green);
+}
+
+/* Check icon */
+.helper > div > svg {
+   stroke: var(--c-green);
+   display: none;
+   margin-right: var(--m-medium);
+}
+
+/* Check icon - Valid */
+.helper > div.valid > svg {
+   display: block;
 }

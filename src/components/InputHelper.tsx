@@ -1,70 +1,61 @@
-import React, { RefCallback } from "react";
+import React from "react";
 import { IRegexTest } from "../utils/regex";
 import ICheck from "../icons/iCheck";
 import "./inputHelper.css";
 
-export type IInputHelperState = 'empty' | 'invalid' | 'hidden';
+export type IInputHelperState = 'error' | 'helper' | undefined;
 
 export interface IInputHelper {
    label: string;
    value: string;
    state?: IInputHelperState;
-   isEmpty?: boolean;
    regexTest?: IRegexTest | IRegexTest[];
 }
 
 export default function InputHelper(props:IInputHelper) {
-   
+
    const { label, value, regexTest, state } = props;
    
-   
-   // useRef hook to store previous state prop
-   const prevStateRef = React.useRef<IInputHelperState>();
-   React.useEffect(() => { prevStateRef.current = state });
-   const prevState = prevStateRef.current;
-   // apply delay before hidding helper if errors got fixed
-   const hideWithDelay = (prevState === 'invalid' && state === 'hidden') ? true : false;
-   
-   console.log("prev", prevState, "current", state, "delay", hideWithDelay)
 
-   // If input value is null show "input is required" message
-   if (state === 'empty') {
-      return (
-         <div className="helper error">
-            <span>{label + " is required" }</span>
-         </div>
-      )
-   }
+   const Content = () => {
 
-   else if ((regexTest && state === "invalid") || (regexTest && hideWithDelay)) {
-      
+      // Display error message if input is empty
+      if (state === 'error') {
+         return <span>{label + " is required" }</span>
+      }
+
       // Make sure the regexTest prop is an array
-      const regexArr = Array.isArray(regexTest) ? regexTest : [regexTest];
-      console.log("expected")
+      const regexArr = Array.isArray(regexTest!) ? regexTest! : [regexTest!];
+      
+      // Otherwise display helper(s)
       return (
-         <div className={`helper ${hideWithDelay ? "valid" : ""}`}>
-            {
-               // Map through test(s)
-               regexArr.map((test:IRegexTest, index:number) => {
-                  const isValid = test.regex.test(value);
-                  
-                  return (
-                     <div
-                     key={index}
-                     className={`help-row ${isValid ? " valid" : ""}`}
-                     >
-                        <ICheck size={16} color={"red"} border={3}/>
-                        <span>{test.description}</span>
-                     </div>
-                  )
-               })
-            }
-         </div>
+         <React.Fragment>
+         {  
+            regexTest && regexArr.map((test:IRegexTest, index:number) => {
+               // Test input value for each regexTest
+               const isValid = test.regex.test(value);
+               
+               return (
+                  <div key={index} className={isValid ? "valid" : ""}>
+                     <ICheck size={16} border={3}/>
+                     <span>
+                        {test.description}
+                     </span>
+                  </div>
+               )
+            })
+         }
+         </React.Fragment>
       )
    }
-   
-   else {
-      console.log("else - not expected")
+
+   if (state !== undefined) {
+      return (
+         <div className={`helper ${state === 'error' ? 'error' : ''}`}>
+            <Content/>
+         </div>
+      )
+   } else {
       return <div style={{display: "none"}}/>
    }
 }

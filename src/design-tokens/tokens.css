@@ -1,0 +1,24 @@
+/* Custom Properties */
+:root {
+   /* Colors */
+   --c-blue: #92A6DE;
+   --c-blue-light-01: #F8FAFF;
+   --c-blue-light-02: #EFF2F9;
+   --c-green: #0DBF73;
+   --c-green-light: #E1FFF2;
+   --c-gray-light-01: #E2E0E6;
+   --c-gray-light-02: #9E9E9E;
+   --c-gray-light-03: #CCC;
+   --c-gray-dark-01: #222;
+   --c-navy: #0A0D36;
+   --c-red: #E42233;
+   --c-red-light-01: #FEF6F7;
+   --c-red-light-02: #FCE8EA;
+
+   /* Margins */
+   --m-extra-small: 4px;
+   --m-small: 8px;
+   --m-medium: 16px;
+   --m-large: 32px;
+   --m-extra-large: 64px;
+}

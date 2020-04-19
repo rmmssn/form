@@ -5,6 +5,13 @@ import Button from "../components/Button";
 import regex from "../utils/regex";
 import { useHistory } from "react-router-dom";
 
+
+// TODO:
+// - Focus on first failed input
+// - if not all inputs are filled, enter doesn't submit, but moves to next one
+// - If input value is just a space (Role), convert value to undefined. .trim()
+
+
 export default function UserPage() {
 
    // Destructure typed State from Store
@@ -35,24 +42,23 @@ export default function UserPage() {
          placeholder: "e.g. Software Engineer",
          required: false,
          value: role,
-         valid: true,
       },
       {
          name: "email",
          label: "Email",
+         placeholder: "Your email address",
          required: true,
          value: email,
          valid: emailIsValid,
-         placeholder: "Your email address",
          regexTest: regex.email,
       },
       {
          name: "password",
          label: "Password",
+         placeholder: "Define password",
          required: true,
          value: password,
          valid: passwordIsValid,
-         placeholder: "Define password",
          regexTest: regex.password
       }
    ];
@@ -60,19 +66,18 @@ export default function UserPage() {
    // Hide input helpers until first submit
    const [showErrors, setShowErrors] = React.useState(false);
 
-   // Use history of "reacr-router-dom" to push next path
+   // Use history of "react-router-dom" to push next path
    const history = useHistory();
-   // Form submit handler
+
+   // Submit handler
    function handleSubmit(event:React.FormEvent<HTMLFormElement>) {
       event.preventDefault();
 
-      // Check if all inputs are ok with computed value from Store
+      // Check against Store computed value
       if (allFieldsAreValid) {
-         console.log("submit");
          history.push("/privacy")
       } else {
-         console.log("don't submit");
-         // Show input helpers after failed submit
+         // Show input helpers after first submit failure
          setShowErrors(true);
       }
    }
@@ -90,13 +95,13 @@ export default function UserPage() {
                      required={input.required}
                      regexTest={input.regexTest}
                      value={input.value}
-                     valid={input.valid}
+                     valid={input.valid!}
                      showError={showErrors}
                   />
                )
             })
          }
-         <Button label="Next"/>
+         <Button>Continue</Button>
       </form>
    )
 }

@@ -8,6 +8,8 @@ export interface IRegisterFormModel {
    role: string;
    email: string;
    password: string;
+   updatesSubscribe: boolean;
+   communicationSubscribe: boolean;
 
    // Action to update the store
    //@ts-ignore
@@ -27,6 +29,8 @@ export const registerFormModel: IRegisterFormModel = {
    role: '',
    email: '',
    password: '',
+   updatesSubscribe: true,
+   communicationSubscribe: false,
 
    // Store values updater
    setFormValue: action((state, payload) => {
@@ -45,9 +49,6 @@ export const registerFormModel: IRegisterFormModel = {
    }),
 
    // email: value vs regex
-   // emailIsValid: computed((state) => {
-   //    return !!(state.email && regex.email.test(state.email));
-   // }),
    emailIsValid: computed((state) => {
       return (
          !!(state.email &&

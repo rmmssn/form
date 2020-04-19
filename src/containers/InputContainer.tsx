@@ -7,7 +7,7 @@ import "./inputContainer.css";
 // Extend 'Input' and 'InputHelper' interfaces
 export interface IInputContainer extends IInput, IInputHelper {
    value: string;
-   valid: boolean;
+   valid?: boolean;
    showError?: boolean;
 }
 
@@ -42,23 +42,18 @@ export default function InputContainer(props:IInputContainer) {
 
    
    // Set input helper's visibility
-   function helperState() {
-      const isEmpty = (showError && required && !value);
-      const hasError = (showError && !valid);
-      const helpOnFocus = (regexTest && !valid && (inputState === "focus"));
-      const helpUntilFixed = (regexTest && !valid && value.length > 0);
+   const isEmpty = (showError && required && !value);
+   const showHelper = (regexTest && ((showError && !valid) || (inputState === "focus")));
 
-      let state:IInputHelperState;
+   // Store input helper's visibility
+   let state:IInputHelperState;
 
-      if (isEmpty) {
-         state = 'empty';
-      } else if (hasError || helpOnFocus || helpUntilFixed) {
-         state = 'invalid'
-      } else {
-         state = 'hidden'
-      }
-
-      return state
+   if (isEmpty) {
+      state = "error";
+   } else if (showHelper) {
+      state = "helper";
+   } else {
+      state = undefined;
    }
 
    return (
@@ -74,7 +69,7 @@ export default function InputContainer(props:IInputContainer) {
          <InputHelper
             label={label}
             value={value}
-            state={helperState()}
+            state={state}
             regexTest={regexTest}
          /> 
       </div>

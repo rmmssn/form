@@ -1,17 +1,17 @@
 import React from "react";
-import IIcons from "./";
+import { IBorderedIcons, BorderedDefaults } from "./";
 
-export default function ICheck(props:IIcons) {
+export default function ICheck(props:IBorderedIcons) {
    
    const { size, border, color } = props;
    return (
       <svg
-         width={size ? size : 24}
-         height={size ? size : 24}
+         width={size}
+         height={size}
          viewBox="0 0 24 24"
          fill="none"
-         stroke={color ? color : "#000"}
-         strokeWidth={border ? border : 2}
+         stroke={color}
+         strokeWidth={border}
          strokeLinecap="round"
          strokeLinejoin="round"
       >
@@ -19,3 +19,5 @@ export default function ICheck(props:IIcons) {
       </svg>
    )
 }
+
+ICheck.defaultProps = BorderedDefaults as IBorderedIcons;

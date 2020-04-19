@@ -1,29 +1,47 @@
+/* Default */
 button {
-   background: var(--c-green);
-   border: none;
+   display: block;
+   border-width: 2px;
+   border-style: solid;
    border-radius: 3px;
    font-weight: 600;
-   color: #FFF;
    padding: 10px 40px;
-   margin-top: 64px;
+   margin-top: var(--m-extra-large);
+   transition: all 120ms ease-in;
+   background: var(--c-green);
+   border-color: var(--c-green);
+   color: #FFF;
+}
+
+/* Left aligned */
+button.left {
+   float: left;
+   clear: both;
+}
+
+/* Center aligned */
+button.center {
+   margin-left: auto;
+   margin-right: auto;
+}
+
+/* Right aligned */
+button.right {
    float: right;
    clear: both;
-   transition: all 120ms ease-in-out;
 }
 
-/* Remove default outline on focus */
+/* Focus */
 button:focus {
    outline: none;
+   border: 2px solid var(--c-blue);
+   box-shadow: inset 0 0 0 1px #FFF;
 }
 
-/* Faster transition when pressed */
+/* Hover & Active */
+button:hover:not(:active),
 button:active {
-   transition: all 50ms ease-in-out;
-}
-
-/* On Hover */
-button:hover:not(:active) {
    cursor: pointer;
-   transform: translateY(-2px);
-   box-shadow: 0 6px 12px -8px rgba(0,0,0,0.3);
+   transform: translateY(2px);
+   transition: all 120ms ease-in-out;
 }

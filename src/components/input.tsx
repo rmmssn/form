@@ -16,6 +16,7 @@ const Input = ((props:IInput) => {
 
    const { label, name, required, placeholder, onChange, onFocusChange } = props;
 
+   // Define input type
    const inputType = () => {
       if (name === "password" || name === "email") return name;
       else return "text";
@@ -24,6 +25,7 @@ const Input = ((props:IInput) => {
    // Local state for input's state
    const [inputState, setInputState] = React.useState<IInputState>('')
 
+   // Save Focus state of instance (local and via props)
    const handleOnFocusChange = (state:IInputState) => {
       if (inputState !== state) {
          setInputState(state);
@@ -44,6 +46,7 @@ const Input = ((props:IInput) => {
             onMouseEnter={() => inputState !== 'focus' && setInputState('hover')}
             onMouseLeave={() => inputState !== 'focus' && setInputState('')}
             onFocus={() => handleOnFocusChange('focus')}
+            autoComplete={name === "password" ? "new-password" : undefined}
          />
          <span className={inputState}/>
       </React.Fragment>

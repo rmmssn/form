@@ -3,9 +3,9 @@
    display: flex;
    flex-flow: column nowrap;
    width: 100%;
-   max-width: var(--l-max-width);
 }
 
+/* Bottom margin for all expect last instance */
 .input-container:not(:last-of-type) {
-   margin-bottom: 32px;
+   margin-bottom: var(--m-large);
 }
