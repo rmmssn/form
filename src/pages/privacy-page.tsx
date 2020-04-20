@@ -12,7 +12,7 @@ export default function PrivacyPage() {
 
    function handleSubmit(event:React.FormEvent<HTMLFormElement>) {
       event.preventDefault();
-      history.push("/done")
+      history.push("/confirm")
    }
 
    const { setFormValue } = useStoreActions((action:IActionModel):any => action.registerForm);

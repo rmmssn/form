@@ -11,11 +11,10 @@ export interface IRegisterFormModel {
    updatesSubscribe: boolean;
    communicationSubscribe: boolean;
 
-   // Action to update the store
-   //@ts-ignore
-   setFormValue: Action<RegisterFormModel, Partial<State<IRegisterFormModel>>>;
-
-   // Computed values from store
+   // Actions to update Store
+   setFormValue: Action<IRegisterFormModel, Partial<State<IRegisterFormModel>>>;
+   
+   // Computed values from Store
    fullnameIsValid: Computed<IRegisterFormModel, boolean>;
    emailIsValid: Computed<IRegisterFormModel, boolean>;
    passwordIsValid: Computed<IRegisterFormModel, boolean>;
@@ -42,10 +41,9 @@ export const registerFormModel: IRegisterFormModel = {
    ** return Booleans
    */
 
-   // fullname: value vs regex
+   // fullname: value !== null
    fullnameIsValid: computed((state) => {
-      // return regex.lettersSpace.test(state.fullname);
-      return true;
+      return (!!(state.fullname));
    }),
 
    // email: value vs regex

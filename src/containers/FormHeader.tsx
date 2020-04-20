@@ -1,33 +1,37 @@
 import * as React from "react";
+import { useLocation } from "react-router-dom";
+import Pages, { IPage } from "../pages/data";
 import "./formHeader.css";
 
-interface IItem {
-   nbr: number;
-   label: string;
-}
-
-function Item(props:IItem) {
-   return (
-      <div className="form-step">
-         <span>{props.nbr}</span>
-         <span>{props.label}</span>
-      </div>
-   )
-}
-
-const steps = ["User", "Privacy", "Done"];
-
 export default function FormHeader() {
+
+   // Get current location
+   // i.e. "/privacy" => "privacy"
+   const currentLocation = useLocation().pathname;
+   
+   // Store a reversed version of Pages[] in a Ref
+   const reversePages = React.useRef<IPage[]>();
+   if (!reversePages.current) {
+      reversePages.current = Pages.reverse();
+   }
+
    return (
       <div className="form-header">
+         
          <div className="steps">
          {
-            steps.map((step:string, index:number) => {
-               return <Item key={step} nbr={index + 1} label={step}/>
+            reversePages.current.map((page:IPage, index:number) => {
+               const isActive = currentLocation === page.path;
+
+               return (
+                  <div key={page.path} className={`step ${isActive ? "active" : ""}`}>
+                     <span>{`${index + 1}. ${page.name}`}</span>
+                  </div>
+               )
             })
          }
          </div>
-         <span/>
+
       </div>
    )
 }

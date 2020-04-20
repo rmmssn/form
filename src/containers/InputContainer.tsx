@@ -33,7 +33,7 @@ export default function InputContainer(props:IInputContainer) {
    // onChange input handler
    function handleInputChange(event:React.FormEvent<HTMLInputElement>) {
       const target = event.target as HTMLInputElement;
-      setFormValue({[target.name]: target.value});
+      setFormValue({[target.name]: target.value.trim()});
    };
 
 
@@ -50,6 +50,7 @@ export default function InputContainer(props:IInputContainer) {
 
    if (isEmpty) {
       state = "error";
+      // forwardedInputRef.current && forwardedInputRef.current.focus();
    } else if (showHelper) {
       state = "helper";
    } else {

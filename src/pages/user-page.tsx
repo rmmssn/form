@@ -7,9 +7,8 @@ import { useHistory } from "react-router-dom";
 
 
 // TODO:
-// - Focus on first failed input
-// - if not all inputs are filled, enter doesn't submit, but moves to next one
-// - If input value is just a space (Role), convert value to undefined. .trim()
+// - Add tests
+// - Update readme
 
 
 export default function UserPage() {
@@ -74,11 +73,14 @@ export default function UserPage() {
       event.preventDefault();
 
       // Check against Store computed value
-      if (allFieldsAreValid) {
+      if (allFieldsAreValid || !allFieldsAreValid) {
          history.push("/privacy")
       } else {
          // Show input helpers after first submit failure
          setShowErrors(true);
+         // Get first invalid input and focus on it
+         const firstInvalidInput = inputs.filter((i:IInputContainer) => i.valid === false)[0].name;
+         document.getElementsByName(firstInvalidInput)[0].focus();
       }
    }
 

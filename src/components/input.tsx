@@ -12,9 +12,9 @@ export interface IInput {
    onFocusChange?: (state:IInputState) => void;
 }
 
-const Input = ((props:IInput) => {
+export default function Input(props:IInput) {
 
-   const { label, name, required, placeholder, onChange, onFocusChange } = props;
+   const {label, name, required, placeholder, onChange, onFocusChange } = props;
 
    // Define input type
    const inputType = () => {
@@ -51,6 +51,4 @@ const Input = ((props:IInput) => {
          <span className={inputState}/>
       </React.Fragment>
    )
-})
-
-export default Input;
+};
