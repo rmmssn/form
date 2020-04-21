@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from "../components/Button";
+import Button from "../components/button/Button";
 import Checkmark from '../icons/composed/Checkmark';
-import Tile from "../components/Tile";
+import Tile from "../components/tile/Tile";
 import { useHistory } from "react-router-dom";
 import { useStoreActions, IActionModel, initialState, useStoreState, IStateModel } from '../store';
 

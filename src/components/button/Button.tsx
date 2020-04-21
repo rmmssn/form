@@ -8,13 +8,16 @@ interface IButton {
    onClick: () => void;
 }
 
-
 export default function Button(props:IButton) {
 
    const { children, align, type, onClick} = props;
 
    return (
-      <button className={align} onClick={onClick && onClick} type={type}>
+      <button
+         className={align}
+         type={type}
+         onClick={onClick && onClick}
+      >
          {children}
       </button>
    )

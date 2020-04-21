@@ -1,7 +1,7 @@
 import { Action, State, Computed, action, computed } from "easy-peasy";
 import regex, { IRegexTest } from "../../utils/regex";
 
-// RegisterFormModel types => Store
+// RegisterFormModel types used in Store
 export interface IRegisterFormModel {
    // Input values
    fullname: string;
@@ -31,7 +31,7 @@ export const registerFormModel: IRegisterFormModel = {
    updatesSubscribe: true,
    communicationSubscribe: false,
 
-   // Store values updater
+   // Update Store values
    setFormValue: action((state, payload) => {
       return { ...state, ...payload }
    }),

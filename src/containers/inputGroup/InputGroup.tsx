@@ -1,17 +1,17 @@
 import React from "react";
-import { useStoreActions, IActionModel } from "../store";
-import Input, { IInput, IInputState } from "../components/Input";
-import InputHelper, { IInputHelper, IInputHelperState } from "../components/InputHelper";
-import "./inputContainer.css";
+import { useStoreActions, IActionModel } from "../../store";
+import Input, { IInput, IInputState } from "../../components/input/Input";
+import InputHelper, { IInputHelper, IInputHelperState } from "../../components/inputHelper/InputHelper";
+import "./inputGroup.css";
 
 // Extend 'Input' and 'InputHelper' interfaces
-export interface IInputContainer extends IInput, IInputHelper {
+export interface IInputGroup extends IInput, IInputHelper {
    value: string;
    valid?: boolean;
    showError?: boolean;
 }
 
-export default function InputContainer(props:IInputContainer) {
+export default function InputGroup(props:IInputGroup) {
    
    // Destructure props
    const {
@@ -42,20 +42,19 @@ export default function InputContainer(props:IInputContainer) {
 
    
    // Set input helper's visibility
-   const isEmpty = (showError && required && !value);
+   const inputHasNoValue = (showError && required && !value);
    const showHelper = (regexTest && ((showError && !valid) || (inputState === "focus")));
 
-   // Store input helper's visibility
-   let state:IInputHelperState;
+   // Define input helper's visibility
+   let helperState:IInputHelperState;
 
-   if (isEmpty) {
-      state = "error";
-      // forwardedInputRef.current && forwardedInputRef.current.focus();
+   if (inputHasNoValue) {
+      helperState = "error";
    } else if (showHelper) {
-      state = "helper";
+      helperState = "helper";
    } else {
-      state = undefined;
-   }
+      helperState = undefined;
+   };
 
    return (
       <div className="input-container">
@@ -70,7 +69,7 @@ export default function InputContainer(props:IInputContainer) {
          <InputHelper
             label={label}
             value={value}
-            state={state}
+            state={helperState}
             regexTest={regexTest}
          /> 
       </div>

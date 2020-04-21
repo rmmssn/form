@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { StoreProvider } from "easy-peasy"
-import { store } from '../store';
-import Pages, { IPage } from "../pages/data";
-import FormHeader from "./FormHeader";
-import "../design-tokens/tokens.css";
+import { store } from '../../store';
+import Pages, { IPage } from "../../pages/data";
+import FormHeader from "../formHeader/FormHeader";
+import "../../design-tokens/tokens.css";
 import "./app.css";
 
 export default function App() {

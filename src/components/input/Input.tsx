@@ -7,7 +7,7 @@ export interface IInput {
    name: string;
    label: string;
    required: boolean | undefined;
-   placeholder?: string;
+   placeholder: string;
    onChange?: (e:React.FormEvent<HTMLInputElement>) => void;
    onFocusChange?: (state:IInputState) => void;
 }
@@ -20,10 +20,10 @@ export default function Input(props:IInput) {
    const inputType = () => {
       if (name === "password" || name === "email") return name;
       else return "text";
-   }
+   };
 
-   // Local state for input's state
-   const [inputState, setInputState] = React.useState<IInputState>('')
+   // Create local state for input's state (props optional)
+   const [inputState, setInputState] = React.useState<IInputState>('');
 
    // Save Focus state of instance (local and via props)
    const handleOnFocusChange = (state:IInputState) => {
@@ -31,16 +31,15 @@ export default function Input(props:IInput) {
          setInputState(state);
          onFocusChange && onFocusChange(state);
       }
-   }
+   };
 
    return (
       <React.Fragment>
          <label htmlFor={name}>{label}:{required && <span>*</span>}</label>   
          <input
             name={name}
-            required={required}
             type={inputType()}
-            placeholder={placeholder && placeholder}
+            placeholder={placeholder}
             onChange={onChange}
             onBlur={() => handleOnFocusChange('')}
             onMouseEnter={() => inputState !== 'focus' && setInputState('hover')}
@@ -52,3 +51,9 @@ export default function Input(props:IInput) {
       </React.Fragment>
    )
 };
+
+Input.defaultProps = {
+   label: "Label",
+   required: false,
+   placeholder: "Type here"
+} as IInput;

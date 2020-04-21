@@ -1,13 +1,13 @@
 import React from 'react';
-import Button from "../components/Button";
+import Button from "../components/button/Button";
 import { useHistory } from "react-router-dom";
-import Checkbox from '../components/Checkbox';
-import Tile from "../components/Tile";
+import Checkbox from '../components/checkbox/Checkbox';
+import Tile from "../components/tile/Tile";
 import { useStoreActions, useStoreState, IStateModel, IActionModel } from "../store";
 
 export default function PrivacyPage() {
 
-   // Use history of "reacr-router-dom" to push next path
+   // Use history of "react-router-dom" to push next path
    const history = useHistory();
 
    function handleSubmit(event:React.FormEvent<HTMLFormElement>) {
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
             <React.Fragment>
                <Checkbox
                   checked={updatesSubscribe}
-                  onChange={setUpdatesStoreValue}
+                  onClick={setUpdatesStoreValue}
                   style={{marginBottom: 8}}
                />
                Receive updates about Tray.io product by email
@@ -51,7 +51,7 @@ export default function PrivacyPage() {
             <React.Fragment>
                <Checkbox
                   checked={communicationSubscribe}
-                  onChange={setCommunicationStoreValue}
+                  onClick={setCommunicationStoreValue}
                   style={{marginBottom: 8}}
                />
                Receive communication by email for other products created by the Tray.io team

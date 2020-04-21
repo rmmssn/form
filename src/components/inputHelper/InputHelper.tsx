@@ -1,6 +1,6 @@
 import React from "react";
-import { IRegexTest } from "../utils/regex";
-import ICheck from "../icons/iCheck";
+import { IRegexTest } from "../../utils/regex";
+import ICheck from "../../icons/iCheck";
 import "./inputHelper.css";
 
 export type IInputHelperState = 'error' | 'helper' | undefined;
@@ -16,7 +16,9 @@ export default function InputHelper(props:IInputHelper) {
 
    const { label, value, regexTest, state } = props;
    
-
+   /*
+   ** Create a component to return the helper's content
+   */ 
    const Content = () => {
 
       // Display error message if input is empty
@@ -49,13 +51,21 @@ export default function InputHelper(props:IInputHelper) {
       )
    }
 
+   /*
+   ** If a state was provided, return helper with the appropriate content
+   */
    if (state !== undefined) {
       return (
-         <div className={`helper ${state === 'error' ? 'error' : ''}`}>
+         <div className={`helper ${state === 'error' ? 'error' : ''}`} data-testid="input helper">
             <Content/>
          </div>
       )
    } else {
+      // If no state was provided, return an empty <div/>
       return <div style={{display: "none"}}/>
    }
 }
+
+InputHelper.defaultProps = {
+   label: "label"
+} as IInputHelper;

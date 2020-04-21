@@ -1,14 +1,9 @@
 import React from 'react';
 import { useStoreState, IStateModel } from "../store";
-import InputContainer, { IInputContainer } from "../containers/InputContainer";
-import Button from "../components/Button";
+import InputGroup, { IInputGroup } from "../containers/inputGroup/InputGroup";
+import Button from "../components/button/Button";
 import regex from "../utils/regex";
 import { useHistory } from "react-router-dom";
-
-
-// TODO:
-// - Add tests
-// - Update readme
 
 
 export default function UserPage() {
@@ -26,7 +21,7 @@ export default function UserPage() {
    } = useStoreState((state:IStateModel):any => state.registerForm);
 
    // Inputs data
-   const inputs:IInputContainer[] = [
+   const inputs:IInputGroup[] = [
       {  
          name: "fullname",
          label: "Full Name",
@@ -73,13 +68,13 @@ export default function UserPage() {
       event.preventDefault();
 
       // Check against Store computed value
-      if (allFieldsAreValid || !allFieldsAreValid) {
+      if (allFieldsAreValid) {
          history.push("/privacy")
       } else {
          // Show input helpers after first submit failure
          setShowErrors(true);
-         // Get first invalid input and focus on it
-         const firstInvalidInput = inputs.filter((i:IInputContainer) => i.valid === false)[0].name;
+         // Focus on first invalid input
+         const firstInvalidInput = inputs.filter((i:IInputGroup) => i.valid === false)[0].name;
          document.getElementsByName(firstInvalidInput)[0].focus();
       }
    }
@@ -87,9 +82,9 @@ export default function UserPage() {
    return (
       <form onSubmit={handleSubmit} noValidate>
          { 
-            inputs.map((input:IInputContainer) => {
+            inputs.map((input:IInputGroup) => {
                return (
-                  <InputContainer
+                  <InputGroup
                      key={input.name}
                      name={input.name}
                      label={input.label}

@@ -5,6 +5,9 @@ interface IRegex {
    password: IRegexTest[];
 }
 
+/* To be assigned to each input's data
+** in "user-page.tsx"
+*/
 const regex:IRegex = {
    email: {
       description: "Must be a valid email address",

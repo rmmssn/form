@@ -12,10 +12,14 @@ export default function Tile(props:ITile) {
    const { children, variation, onClick } = props;
    const isClickable = !!(onClick) ? "link" : "";
 
+   /*
+   ** Get className from variation & onClick props
+   ** e.g .tile .primary .link
+   */
    const classes = `tile ${variation + " " + isClickable}`;
 
    return (
-      <div className={classes} onClick={onClick && onClick}>
+      <div className={classes} onClick={onClick && onClick} data-testid="tile">
          {children}
       </div>
    )
