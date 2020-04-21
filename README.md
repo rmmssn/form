@@ -20,7 +20,7 @@ You may have heard or seen from my portfolio that I come from a Product Design b
 As you can appreciate (and probably see in my code), I've never had a code review in my life and I'd greatly appreciate, regardless of its outcome, if I could get some feedback on my implementation.<br /><br />
 I took the liberty to use "Easy Peasy over "Redux" to avoid the extra boilerplate and also not to not use any css pre-processor as I couldn't figure out a way to add one without ejecting. (I also thought it wouldn't really matter considering the project's size).</br></br>
 
-Thank for your time and consideration 👍
+Thanks for your time and consideration 👍
 
 
 ## Sketch file
